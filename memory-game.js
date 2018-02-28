@@ -42,10 +42,14 @@
         }
 
         let badgeId = parseInt(id.split('-')[1]);
+        let messages = document.getElementById('game-messages');
+        messages.innerHTML = '';
+
         if (this.badgesToCompare.length > 0 && this.alreadyInList(id)) {
             document.getElementById(this.badgesToCompare[this.badgesToCompare.length - 1].index).src = this.defaultImg;
             this.badgesToCompare.pop();
             this.allowedClicks = 2;
+            messages.innerHTML = '<i class="fas fa-times-circle"></i>Por favor, escolha dois badges diferentes.';
             return;
         }
 
@@ -53,7 +57,6 @@
             return;
         }
 
-        console.log(this.gameDataArray[badgeId]);
         document.getElementById(id).src = this.gameDataArray[badgeId].img;
 
         this.badgesToCompare.push({src: this.gameDataArray[badgeId].img, index: id});
@@ -65,14 +68,18 @@
 
             this.clickAllowed = false;
 
-            if (this.badgesToCompare[this.badgesToCompare.length - 1].src !== this.badgesToCompare[this.badgesToCompare.length - 2].src) {
+            let badgeOne = this.badgesToCompare[this.badgesToCompare.length - 1];
+            let badgeTwo = this.badgesToCompare[this.badgesToCompare.length - 2];
+
+            if (badgeOne.src !== badgeTwo.src) {
                 setTimeout(this.resetPair.bind(this), 750);
 
             } else {
 
                 this.availablePairs--;
-                document.getElementById(this.badgesToCompare[this.badgesToCompare.length - 1].index).classList.add('matched');
-                document.getElementById(this.badgesToCompare[this.badgesToCompare.length - 2].index).classList.add('matched');
+
+                document.getElementById(badgeOne.index).classList.add('matched');
+                document.getElementById(badgeTwo.index).classList.add('matched');
 
                 if (this.availablePairs === 0) {
                     this.gameStarted = false;
@@ -139,7 +146,7 @@
         let temporaryValue;
         let randomIndex;
 
-        while (0 !== currentIndex) {
+        while (currentIndex !== 0) {
 
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
