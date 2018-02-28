@@ -1,0 +1,46 @@
+/* Some styles for the memory-game.html
+ *
+ * Copyright 2018 - Rui Silva
+ */
+.wrapper {
+    text-align: center;
+}
+
+#game-area {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.badge {
+    height:128px;
+    width: 128px;
+    padding-right:10px;
+}
+
+.matched {
+    cursor: not-allowed;
+}
+
+.btn {
+    background-color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin: 0 auto;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+.btn-start {
+    display: none;
+}
+
+#timer {
+    display: none;
+}
+
+.share-twitter {
+    display: none;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <title>Jogo da Memória</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+            <div id="game-area">
+                <button id="new-game" class="btn">Novo Jogo</button>
+                <div id="game-board"></div>
+                <button id="start-game" class="btn btn-start">Iniciar Jogo</button>
+                <p id="timer">0 segundos</p>
+                <a href="#" id="twitter" class="share-twitter">Partilhar no twitter</a>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="memory-game.js"></script>
+        <script type="text/javascript">
+            function getJsonP() {
+                let link = document.getElementById('new-game');
+                link.style.display = 'none';
+
+                let script = document.createElement('script');
+                script.id = 'jsonp-id';
+                script.src = 'https://services.sapo.pt/Codebits/listbadges?callback=setGame';
+                document.body.appendChild(script);
+            }
+
+            function setGame(data) {
+                let badge;
+                let p;
+                let btn = document.getElementById('start-game');
+                let script = document.getElementById('jsonp-id');
+                let gameEngine = new MemoryGame();
+                let gameBadges = gameEngine.shuffleBadges(gameEngine.chooseBadges(gameEngine.shuffleBadges(data)));
+
+                script.parentElement.removeChild(script);
+                window.boardDiv = document.getElementById('game-board');
+                gameEngine.gameDataArray = gameBadges;
+
+                for (let i = 0; i < gameBadges.length; i++) {
+                    badge = document.createElement('img');
+                    badge.src = gameEngine.defaultImg;
+                    badge.id = 'badge-' + i;
+                    badge.classList.add('badge');
+                    badge.addEventListener('click', gameEngine.changeSource.bind(gameEngine, badge.id), false);
+                    window.boardDiv.appendChild(badge);
+                    if ((i + 1) % 6 === 0) {
+                        p = document.createElement('p');
+                        window.boardDiv.appendChild(p);
+                    }
+                }
+                btn.addEventListener('click', gameEngine.startGame.bind(gameEngine), false);
+                btn.style.display = 'block';
+            }
+
+            (function newGame() {
+                let new_game = document.getElementById('new-game');
+                new_game.addEventListener('click', getJsonP, false);
+            })();
+        </script>
+    </body>
+</html>
