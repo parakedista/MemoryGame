@@ -77,13 +77,14 @@
                 if (this.availablePairs === 0) {
                     this.gameStarted = false;
 
+                    let stopwatch = document.getElementById('stopwatch');
                     let timer = document.getElementById('timer');
                     let totalTime = timer.innerHTML;
                     let twitter = document.getElementById('twitter');
 
                     twitter.setAttribute( 'href', 'https://twitter.com/intent/tweet/?text=Memory JavaScript FTW in: ' + totalTime );
 
-                    timer.style.display = 'none';
+                    stopwatch.style.display = 'none';
                     twitter.style.display = 'block';
 
                 } else {
@@ -113,7 +114,7 @@
      */
     MemoryGame.prototype.startGame = function () {
         let start = document.getElementById('start-game');
-        let timer = document.getElementById('timer');
+        let stopwatch = document.getElementById('stopwatch');
 
         this.gameStarted = true;
 
@@ -121,7 +122,7 @@
             if (!this.gameStarted)
                 return;
             start.style.display = 'none';
-            timer.style.display = 'block';
+            stopwatch.style.display = 'block';
             this.updateTimer();
 
         }.bind(this), 800);
