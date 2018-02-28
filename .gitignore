@@ -1,2 +1,7 @@
-# jetbrains
+# Jetbrains
 .idea/
+.idea_modules/
+
+# System Files
+*.DS_Store
+Thumbs.db
