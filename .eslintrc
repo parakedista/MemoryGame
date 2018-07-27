@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint:recommended", "airbnb"],
+  "extends": "airbnb",
   "ecmaFeatures": {
     "jsx": true,
     "modules": true
