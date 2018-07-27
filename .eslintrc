@@ -1,5 +1,5 @@
 {
-  "preset": "airbnb",
+  "extends": ["eslint:recommended", "airbnb"],
   "ecmaFeatures": {
     "jsx": true,
     "modules": true
